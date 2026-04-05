@@ -1,20 +1,22 @@
 # Zone Gate System (by Jorji)
 This is a personal fork of KindredCommands by Odjit with one addition: zone gating.
 Zone gating allows admins to restrict specific map zones or radius based on player level — similar to the existing .region gate system but at a more granular level, using the game's map zone polygons rather than broad regions. This is useful for servers that want to gate specific areas (boss areas, farm zones, etc.) by level, and force players to level up, without locking an entire region.
-## What's Added
-.zone name — shows the zone ID and name of the zone you are standing in (admin only). Use this to find zone IDs for gating
-.zone gate "Name" [level] — gates the zone you are currently standing in with a minimum level requirement. Players below the level will be teleported back to their last valid position
-.zone gateradius "Name" [level] [radius] / shortcut gr — gates a circular area centered on your current position instead of the entire zone (useful for bosses like Valencia)
-.zone ungate "Name" / shortcut ug — removes a zone gate (works for both polygon and radius gates)
-.zone list / shortcut l — lists all gated zones and their level requirements (available to all players)
+## Zone Gate Commands
+| Command | Description |
+|---------|-------------|
+| `.zone name` | Shows the zone ID and name of the zone you are standing in. Use this to find zone IDs for gating. (admin only) |
+| `.zone gate "Name" [level]` | Gates the zone you are currently standing in with a minimum level requirement. Players below the level will be teleported back to their last valid position. (admin only) |
+| `.zone gateradius "Name" [level] [radius]` / `gr` | Gates a circular area centered on your current position instead of the entire zone. Useful for specific spots like boss arenas. (admin only) |
+| `.zone ungate "Name"` / `ug` | Removes a zone gate. Works for both polygon and radius gates. (admin only) |
+| `.zone list` / `l` | Lists all gated zones and their level requirements. (all players) |
 
 ## How It Works
 
-Uses the game's MapZonePolygonVertexElement to detect zone boundaries precisely
-Tracks each player's highest level reached (reusing KindredCommands' existing RegionService)
-Players below the required level are teleported back to their last valid position inside an allowed zone, or to the nearest accessible waypoint as a fallback
-Zone gates persist through server restarts (saved to zones.json in the config folder)
-A 1 second cooldown prevents teleport shaking when a player is repeatedly at the boundary
+- Uses the game's MapZonePolygonVertexElement to detect zone boundaries precisely
+- Tracks each player's highest level reached (reusing KindredCommands' existing RegionService)
+- Players below the required level are teleported back to their last valid position inside an allowed zone, or to the nearest accessible waypoint as a fallback
+- Zone gates persist through server restarts (saved to zones.json in the config folder)
+- A 1 second cooldown prevents teleport shaking when a player is repeatedly at the boundary
 
 ![](logo.png)
 # KindredCommands for V Rising
