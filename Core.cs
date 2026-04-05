@@ -45,6 +45,7 @@ internal static class Core
 	public static PrefabService Prefabs { get; internal set; }
 	public static PrisonerService Prisoners { get; internal set; }
 	public static RegionService Regions { get; internal set; }
+	public static ZoneService Zones { get; internal set; }
 	public static SoulshardService SoulshardService { get; internal set; }
 	public static TerritoryLocationService TerritoryLocation { get; internal set; }
 	public static TrackPlayerEquipmentService TrackPlayerEquipment { get; internal set; }
@@ -83,6 +84,7 @@ internal static class Core
 		GlobalMisc = new();
 		Prisoners = new();
 		Regions = new();
+		Zones = new();
 		SoulshardService = new();
 		TerritoryLocation = new();
 		TrackPlayerEquipment = new();
