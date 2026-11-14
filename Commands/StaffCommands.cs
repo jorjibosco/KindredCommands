@@ -13,7 +13,7 @@ namespace KindredCommands.Commands;
 
 internal class StaffCommands
 {
-	[Command("staff", description: "Shows online Staff members.", adminOnly: false)]
+	[Command("admin", description: "Shows online Staff members.", adminOnly: false)]
 	public static void WhoIsOnline(ChatCommandContext ctx)
 	{
 		var users = PlayerService.GetUsersOnline();
@@ -29,20 +29,22 @@ internal class StaffCommands
 				{
 					string _role = _kvp.Value.Replace("</color>", "");
 					builder
+						.Append("<color=#00ffbb>")
 						.Append(_role)
+						.Append("</color> ")
 						.Append(player.Name)
-						.Append("</color>");
-					builder.Append(' ');
+						.Append(" ");
 				}
 			}
 		}
 		if (builder.Length == 0)
 		{
-			ctx.Reply("There are no staff members online.");
+			ctx.Reply("There are no admins online.");
 			return;
 		}
-		ctx.Reply($"Online Staff: {builder}");
+		ctx.Reply($"<color=#ffffff>Online Admins: {builder}</color>");
 	}
+
 	[Command("reloadstaff", description: "Reloads the staff config.", adminOnly: true)]
 	public static void ReloadStaff(ChatCommandContext ctx)
 	{

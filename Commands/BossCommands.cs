@@ -181,16 +181,26 @@ internal class BossCommands
 	}
 
 	[Command("list", "ls", description: "Lists all locked bosses.", adminOnly: false)]
-    public static void ListLockedBossesCommand(ChatCommandContext ctx)
-    {
-        var lockedBosses = Core.Boss.LockedBossNames;
-        if (lockedBosses.Any())
-        {
-            ctx.Reply($"Locked bosses: {string.Join(", ", lockedBosses)}");
-        }
-        else
-        {
-            ctx.Reply("No bosses are currently locked.");
-        }
-    }
+	public static void ListLockedBossesCommand(ChatCommandContext ctx)
+	{
+		var lockedBosses = Core.Boss.LockedBossNames;
+		if (!lockedBosses.Any())
+		{
+			ctx.Reply("<color=#F54927>No bosses</color> are currently locked.");
+			return;
+		}
+
+		var sb = new System.Text.StringBuilder();
+		sb.AppendLine("<color=#00FFBB>— Locked Bosses —</color>");
+		foreach (var boss in lockedBosses)
+		{
+			if (sb.Length + boss.Length > Core.MAX_REPLY_LENGTH)
+			{
+				ctx.Reply(sb.ToString());
+				sb.Clear();
+			}
+			sb.AppendLine($"<color=white>{boss}</color>");
+		}
+		ctx.Reply(sb.ToString());
+	}
 }

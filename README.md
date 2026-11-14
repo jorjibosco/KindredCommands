@@ -1,3 +1,40 @@
+<p align="center">
+  <img src="jorji-logo.png" width="256" alt="Jorji logo">
+</p>
+
+# KindredCommands - Hengoria
+
+Fork of [KindredCommands](https://github.com/Odjit/KindredCommands) by Odjit that is used on Hengoria. Everything below the line is Odjit's original documentation.
+
+### Changes in this fork
+
+- **Zone gating** - locking a zone or a radius around you by max level reached, with players below the level pushed back
+- **`.staff` renamed to `.admin`** - for ease of use by players
+- **Style changes** - `.boss list` and some other text changes to fit the rest of the mods on Hengoria
+
+## Zone Gate System
+
+Works like `.region gate` but on the game's map zones (or a radius around you) instead of whole regions, so you can level-lock boss areas or farm spots without locking a full region.
+
+### Commands
+| Command | Description |
+|---------|-------------|
+| `.zone name` | Shows the zone ID and name of the zone you are standing in. Use this to find zone IDs for gating. (admin only) |
+| `.zone gate "Name" [level]` | Gates the zone you are currently standing in with a minimum level requirement. Players below the level will be teleported back to their last valid position. (admin only) |
+| `.zone gateradius "Name" [level] [radius]` / `gr` | Gates a circular area centered on your current position instead of the entire zone. Useful for specific spots like boss arenas. (admin only) |
+| `.zone ungate "Name"` / `ug` | Removes a zone gate. Works for both polygon and radius gates. (admin only) |
+| `.zone list` / `l` | Lists all gated zones and their level requirements. (all players) |
+
+### Notes
+
+- Gate the bosses by zones if you can
+- Uses the max level tracked by the mod, therefore make sure to delete the `regions.json` for a wipe
+- Underleveled players get sent back to their last valid spot, or the nearest waypoint they can use
+- Every online player is checked every frame instead of it being checked less as the number increased. This change was mandatory since player could bypass locks with a certain combination of abilities to suck a boss during active hours.
+- Gates are saved to `zones.json` in the config folder
+
+---
+
 ![](logo.png)
 # KindredCommands for V Rising
 
@@ -472,7 +509,7 @@ Feel free to reach out to me on Discord (odjit) if you have any questions or nee
 ## Player Accessible Commands:
 - `.afk`
   - will put Zzzzz above character and lock wasd movement. It's a toggle.
-- `.staff`
+- `.admin`
   - will list staff who are online.
 - `.ping`
   - tells you your latency
